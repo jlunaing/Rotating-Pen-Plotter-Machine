@@ -1,41 +1,23 @@
-# Term Project Proposal
+# Term Project: Glass Pen Plotter
 
- **Project Description**
- 
- We intend to design an automatic pen drawer to be used with pint glasses. It would have a circular base that rotates around its center (one axis) and a marker that draws a picture on the glass. The marker is fixed on a holder and its motion is accomplished by one and a half axes. One axis is created by the motion of a lead screw that is actuated by a motor. The other axis, half-axis is an "in/out" motion by a solenoid.
- 
- The motors and the solenoid are connected to the STM32 Nucleo MCU which acts as the CPU and runs a program that implements the logic needed to accomplish the task.
- 
- A way to feed the graphics of the picture or drawing into our program (input) will be implemented as suggested by the term project instructions.
- 
- **Bill of Materials**
- 
- A breakdown of the cost for the individual components that make up the project is shown below. The rough estimate of the total cost is slightly above $70. 
- 
- | Qty. | Part                  		| Source                | Est. Cost |
- |:----:|:------------------------------|:----------------------|:---------:|
- |  1   | Plywood Sheet					| Home Depot            |  $16.00   |
- |  1   | Wood							| ME405 Tub             |     -     |
- |  1   | Lazy Susan Bearing    		| Home Depot            |   $5.03   |
- |  2   | Marker (Sharpie Pen)			| Amazon			    |  $14.97   |
- |  1   | Pen Holder	        		| 3D Printer            |     -     |
- |  1   | Power Transistor and Diode	| ME405 Tub             |     -     |
- |  1   | Solenoid				        | Adafruit				|   $7.50	|
- |  2   | Pittman Gearmotor				| ME405 Tub             |     -     |
- |  1   | Lead screw					| Home Depot            |   $7.31   |
- |  1   | STM32 Nucleo MCU with Shoe 	| ME405 Tub             |     -     |
- |  1   | Motor Driver					| ME405 Tub             |     -     |
- |  1   | Belt (TBD)					| DigiKey     	        |     -     |
- |  1   | Pint Glass Set (6 Units)		| Amazon	            |  $21.95   |
- |  1   | Holding Mechanism (TBD)		| 3D Printer            |     -     |
+This repository contains the source code and documentation for the term project for the Mechatronics course at California Polytechnic State University.
 
+ **Introduction**
  
- **Concept Sketch**
+ For this term project, we decided to create a pen plotter to draw on pint glasses. The purpose of this device is to add decoration to the glass, in the form of ink marks, and give it a sense of style or personality. We intended for this to be used by people who wanted to have a cool homemade design on their glasses or for low volume production of a fairly typical design. For our project, we made a star but this was only one design and could be adapted to make other designs as necessary.
  
- A model of the concept design with labeled components is shown below (**Figure 1**). The pint glass is used as implicit reference dimension. A typical pint glass is about 6-inch tall with a mean diameter of 3-inches. Based on this, we assume that the overall dimensions of the assembly would be around 6-inches in length and width as well as 7-8 inches tall.
+ **Hardware Design Overview**
  
-  ![3-D Model](https://github.com/jdlu97/Term-Project/blob/main/src/term_proj_drawing.png?raw=true)
+ We used several components from various sources to create our pen plotter. The first piece of our assembly was a ceramic wheel that had a stationary base and a rotating part that would spin about its axis. We hot glued a wooden gear to the top of this piece to allow for meshing with another same size gear on the base of our design. This gear then had 6 hot glue spots put on it to hold the glass in place while it was being inked. From there, we had a second wooden gear attached to a metal gear to our motor. Overall, the wooden gear meshed with the wooden gear on the ceramic wheel and allowed for rortaion around the theta axis. Next for the r axis we have a lead screw that was angled to the same angle as our glass. This lead screw also had a carriage that was able to rotate which contained the sharpie and solenoid that we used to create the device. This carriage would move up and down the lead screw in the r-direction allowing for different points to be inked. The solenoid was used to bring the sharpie in and out of to allow ink marks to be made. This carriage sat in a wooden plate with an internal slot cut out of it. This constrained the motion of the carriage to only up and down and gave support to whole system. Next on the top of the wooden piece connected to the lead screw was a bearing that would hold the lead screw in place during operation reducing vibration of the system and allow the system to move freely. Finally for the base we made it out of 3D printed plastic that interfaced with the base of the ceramic wheel. This device had a two holes cut out for the motors to fit into and allowed for wooden board to be tilted at different angles. Overall for our motors we used the motors given to us in our box which contained a gear motor and an encoder to read out position.
+
+ **Software Overview**
  
- **Figure 1:** SolidWorks model of the pint-glass pen drawer.
+ We used a series of tasks to allow our system to move. Our code had 4 tasks that worked in conjunction with a main file to create the desired motion. The 4 tasks were an encoder task, a motor controller task, a cotask, and a share task. The motor controller task and the encoder task each had two instances of it to create motion for both motors and encoders. These were used to asynchronously control the motors and allow for simultaneous motion in the system. Also as a major note for our system, we must convert HPGL code into encoder ticks. In order to do this transformation we take the HPGL code from an inkscape image and then process them in an excel file and save it as a CSV file. From there we import the CSV file into our nucleo and our main file takes in the data and transforms it into theta and r values. For more information about these tasks please use this link to our doxygen page which describes the function and variables used in each task.
  
+ ** Results and Discussion **
  
+ Overall in order to test our system we performed several incremental tests. The first test was to see if our system was able to convert x and y coordinates into theta and r coordinates. After confirming that we were able to complete this step we used these coordinates to control two flywheels. We chose to use the flywheels to test as it was a piece of hardware we were familar with and would allow us verify that our controller, motors, and encoders, were all working together correctly. Next we moved into testing on our actual system. For this we connected out motors to our hardware and then dorve the system performing a whole system test. Overall our system perfromed well in the first two tests. We were very easily able to convert over the data points and from there control the movement of two flywheels. However once we moved into full system testing we found issues with our setpoints and gains. Overall we found that for the theta position often the motor would have trouble reachign the final position due to stiction or it would oscillate around the final position because the gain was too high. We also bruned out our solenoid during our final testing on the day of the presentation and had to quickly replace it with a working device. So overall while our system initally started out well, it was not until we reached out full system until we noticed several underlying issues that were harder to address.
+ 
+ **Lessons Learned**
+ 
+ Overall we thought that our system perfromed well but there were still many things that we could improve upon. Overall for our presentation we wanted to create a star logo on our pint glass. However our system was only able to create half a star before turning the design into a series of lines. We found that due to some constraints in our system, namely the inertia in the theta direction and a different solenoid that had less travel than the one we had been testing on, did not allow for our system to behave as we anticipated. One of the major issues with the solenoid was the travel that we anticpated that we could get out of it. However on the day of the presentation while testing we bruned out our solenoid making it unfunctional. We had to quickly replace it with another solenoid but this one had less travel and thus did not interact with our system well. Thus we learned to keep a careful eye on the system to ensure that sensitive devices like that do not burn out. The next lesson that we learned was in regards to our theta positioning. Overall we found that due to the resolution of the gears that we had our theta position resolution was very high and thus it was often hard to reach our final theta position goal since we only wanted to move a few encoder ticks. Onto of that due to the necessary hardware pieces to make it move out system contained a lot of inertia which caused our system to have a high stiction. This caused us issues as our motors would not be able to turn to the correct position and thus not be able to move on to the next setpoint. Through these two issues we learned the importance of gearing and resolution. Overall it did not occur to us that our resolution would be so low and thus would impact our ability to reach our specific setpoints while making the hardware, thus when we ran into this issue it was very difficult to try to think of a possible solution that would not reset us to square one. We also learned the imporance of keeping the inertia low as our system would often drift and have to swing back after moving. This caused long lines on our final product thus reducing its effectiveness at creating a star. Overall this project taught us a lot about how to create these system in the future and what issues to keep an eye out for in the future. However out system was not without its benefits. Overall we found that our system did well in the r direction and was able to very easily hit the r direction set point everytime. On top of that the system was modular and would take any glass angle thus increasing its usefullness. Thus we also learned about the usefullness of a modular design and how a high resolution can help reach the set point correctly. 
