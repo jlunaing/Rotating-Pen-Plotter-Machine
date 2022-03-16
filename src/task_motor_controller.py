@@ -58,7 +58,7 @@ class Task_Motor_Controller:
              
              print(self.set_point_share.get())    
              
-             ## Encoder position reading, accounting for 
+             ## Encoder position reading
              true_position = int(self.encoder_share.get())
              print('Encoder value: ', true_position)
              ## Difference between measured and setpoint values 

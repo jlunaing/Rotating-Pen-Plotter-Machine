@@ -3,14 +3,13 @@
     This file contains the main script for our Term Project.
 
     The original structure of the code was developed by JR Ridgely, 
-    Mechatronics lab instructor.
+    instructor of the lab course. No copyright infringement is intended.
     
 @date   March 10, 2022
     
 @author Cade Liberty
 @author Juan Luna
 @author Marcus Monroe
-
 """
 
 import gc
@@ -23,7 +22,7 @@ import task_motor_controller
 
 if __name__ == "__main__":
 
-    # Define encoder pin objects -------------------------------
+    # Encoder pin objects
     
     # ENCODER 1
 
@@ -43,7 +42,7 @@ if __name__ == "__main__":
     ## Timer object for encoder.
     tim_ENC_A_2 = pyb.Timer(4, prescaler = 0, period = 2**16 - 1)
     
-    # Define motor pin objects ---------------------------------
+    # Motor pin objects
     
     # First motor
 
@@ -56,7 +55,7 @@ if __name__ == "__main__":
     ## Timer object for motor with 20-kHz frequency
     Timer_1   = pyb.Timer(3, freq = 20000)
   
-    # second motor
+    # Second motor
 
     ## Enable pin object
     ENA_pin_2 = pyb.Pin(pyb.Pin.cpu.C1, pyb.Pin.OUT_PP)
@@ -67,7 +66,7 @@ if __name__ == "__main__":
     ## Timer object for motor with 20-kHz frequency
     Timer_2   = pyb.Timer(5, freq = 20000)
 
-    # Solenoid pin definition
+    # Solenoid pin object
     
     ## Solenoid pin object, set as output pin
     solenoid = pyb.Pin(pyb.Pin.cpu.C4, pyb.Pin.OUT_PP)
@@ -75,8 +74,6 @@ if __name__ == "__main__":
     solenoid.low()
     
     # Lists containing setpoint coordinates (G code) of the image to be drawn.
-    
-
     with open('x_y_data.csv', 'r') as f:
         ## List to hold data from cvs file
         csv_data = []
@@ -203,7 +200,7 @@ if __name__ == "__main__":
                     task_encoder2.zero()
                     task_motor_controller1.motor.set_duty_cycle(0)
                     task_motor_controller2.motor.set_duty_cycle(0)
-                    print('Completed Design')
+                    print('Drawing completed!')
                     break
                 else:
                     #set solenoid value to high
@@ -211,7 +208,6 @@ if __name__ == "__main__":
                     
                     print('Else statement')
                 finally:
-                    print('finally did finally run')
                     count += 1
                     next_flag1.put(0)
                     next_flag2.put(0)
