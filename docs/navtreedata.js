@@ -26,14 +26,11 @@ var NAVTREE =
 [
   [ "Term Project: Glass Pen Plotter", "index.html", [
     [ "Software Design", "index.html#software", [
-      [ "State-Transition Diagram", "index.html#sec_fsm", [
-        [ "User Task", "index.html#sec_usr", null ],
+      [ "State-Transition Diagrams", "index.html#sec_fsm", [
         [ "Encoder Task", "index.html#sec_enc", null ],
-        [ "Motor-Controller Task", "index.html#sec_mot_ctrl", null ],
-        [ "Solenoid Task", "index.html#sec_sol", null ]
+        [ "Motor-Controller Task", "index.html#sec_mot_ctrl", null ]
       ] ]
     ] ],
-    [ "Hardware Design", "index.html#hardware", null ],
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
