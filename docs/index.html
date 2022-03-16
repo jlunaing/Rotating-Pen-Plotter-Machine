@@ -91,7 +91,9 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 Software Design</h1>
 <p >Four tasks allow our system, called "pen plotter" for brevity, to achieve its desired functionality. Two of these tasks are provided by the instructor and accomplish cooperative multitasking and data sharing. The other two, are an encoder tasks to read the position of the motor and a motor-controller task that sets the motor percent duty cycle that corresponds to the setpoint or desired value of position. Because there are two motors for each full axis, there are two motor controller tasks, each with an associated encoder task. Thus, a total of six tasks. However, excluding the ones related to cooperative multitasking and data sharing for purposes of defining a task diagram, we have four tasks in total.</p>
 <p >The task diagram for the overall project is shown below. It is worth noting that while "x" is used to represent one of the axis, it can also be thought of as a "theta" axis, due to the rotating base creating the motion.</p>
-<p >htmlonly &lt;style&gt; div.image img[src = "term_proj_task_diagram.png"]{width:700px} &lt;/style&gt; </p>
+<p > <style> div.image img[src = "term_proj_task_diagram.png"]{width:700px}
+                </style>
+    </p>
 <div class="image">
 <img src="term_proj_task_diagram.png" alt=""/>
 <div class="caption">
@@ -122,7 +124,7 @@ Motor-Controller Task</h3>
 <img src="motor_controller_fsm.png" alt=""/>
 <div class="caption">
 Motor-Controller State-Transition Diagram</div></div>
-<p >In addition, we have the in/out motion of the solenoid. After every setpoint was reached, the solenoid object was set low (active-low configuration) and a dot was "plotted" on the surface of the glass.</p>
+<p >In addition, we have the in/out motion of the solenoid. After every setpoint was reached, the solenoid object was set low (active-low configuration) and a dot was "plotted" on the surface of the glass. This is not included in the controller state-transition diagram because this is handled on the main file.</p>
 <dl class="section date"><dt>Date</dt><dd>Created: February 24, 2022 </dd>
 <dd>
 Modified: March 15, 2022 </dd></dl>

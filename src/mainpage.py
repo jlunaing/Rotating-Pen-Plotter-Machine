@@ -28,7 +28,7 @@ The task diagram for the overall project is shown below. It is worth noting that
 while "x" is used to represent one of the axis, it can also be thought of as a 
 "theta" axis, due to the rotating base creating the motion.
 
-htmlonly <style> div.image img[src = "term_proj_task_diagram.png"]{width:700px}
+\htmlonly <style> div.image img[src = "term_proj_task_diagram.png"]{width:700px}
                 </style>
     \endhtmlonly
     
@@ -81,7 +81,8 @@ of the encoders.
 
 In addition, we have the in/out motion of the solenoid. After every setpoint 
 was reached, the solenoid object was set low (active-low configuration) and a 
-dot was "plotted" on the surface of the glass.
+dot was "plotted" on the surface of the glass. This is not included in the controller
+state-transition diagram because this is handled on the main file.
 
 @date       Created: February 24, 2022
 @date       Modified: March 15, 2022
