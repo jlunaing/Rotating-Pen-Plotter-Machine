@@ -1,10 +1,10 @@
 # Term Project: Plotting on a Pint Glass
 
-This repository contains the source code and documentation for the term project for the Mechatronics course at California Polytechnic State University. Feel free to see the [source files](https://github.com/jdlu97/Rotating-Pen-Plotter-Machine/tree/main/src) and [documentation](https://jdlu97.github.io/Rotating-Pen-Plotter-Machine/) for more information.
+This repository contains the source code and documentation for the Rotating Pen Plotter Machine project.
 
- ## Introduction
+ ## Background
  
- For this term project, we decided to create a pen plotter to draw on pint glasses. The purpose of this device is to add decoration to a glass, in the form of ink marks, and give it a sense of style or personality. We intended for this to be used by people who wanted to have a cool homemade design on their glasses or for low volume production of a fairly typical design. For our project, we made a star but this was only one design and could be adapted to make other designs as necessary.
+ For this project, we decided to create a pen plotter to draw on pint glasses. The purpose of this device is to add decoration to a glass, in the form of ink marks, and give it a sense of style or personality. We intended for this to be used by people who wanted to have a cool homemade design on their glasses or for low volume production of a fairly typical design. For a demo, the source code makes a star but the modularity of the code allows it to be adapted to make other designs.
  
  ## Hardware Design Overview
  
@@ -18,7 +18,7 @@ This repository contains the source code and documentation for the term project 
 
  <p align="center">CAD model of the project</p><br/>
 
- **Software Overview**
+ ## Software Overview
  
  We used a series of tasks to allow our system to move. Our code had 4 tasks that worked in conjunction with a main file to create the desired motion. The 4 tasks were an two [encoder tasks](https://jdlu97.github.io/Rotating-Pen-Plotter-Machine/index.html#sec_enc) and two [controller tasks](https://jdlu97.github.io/Rotating-Pen-Plotter-Machine/index.html#sec_mot_ctrl). In addition, we used the cotask.py and task_share.py files to allow for multitasking and data sharing, respectively. The encoder and controller tasks created motion for both motors and encoders. These were used to asynchronously control the motors and allow for simultaneous motion in the system. 
  The setpoint values were the position coordinates of the image to be drawn. Image data extraction required some pre-processing. In short, we converted HPGL code into encoder ticks. To accomplish this, we opened an image in the Inkspace software and exported in HPGL format. We extracted the information of this file into a CSV file manually. For the presentation, we extracted x- and y-values of the image manually using Excel. However, we ultimately decided to automate this step and extract the x- (or theta-) and y-coordinates from the CSV file into the main script using code. This only requires having the CSV file of the image in the microcontroller. For more information about these tasks, visit the [documentation site](https://jdlu97.github.io/Rotating-Pen-Plotter-Machine/).
