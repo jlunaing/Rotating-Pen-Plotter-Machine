@@ -10,11 +10,13 @@ This repository contains the source code and documentation for the term project 
  
  We used several components from various sources to create our pen plotter. The first piece of our assembly was a ceramic wheel that had a stationary base and a rotating part that would spin about its axis. We hot glued a wooden gear to the top of this piece to allow for meshing with another same size gear on the base of our design. This gear then had 6 hot glue spots put on it to hold the glass in place while it was being inked. From there, we had a second wooden gear attached to a metal gear to our motor. Overall, the wooden gear meshed with the wooden gear on the ceramic wheel and allowed for rotation around the theta axis. Next for the r axis we have a lead screw that was angled to the same angle as our glass. This lead screw also had a carriage that was able to rotate which contained the Sharpie and solenoid that we used to create the device. This carriage would move up and down the lead screw in the r-direction allowing for different points to be inked. The solenoid was used to bring the Sharpie in and out to make the ink marks. This carriage sat in a wooden plate with an internal slot cut out of it. This constrained the motion of the carriage to only up and down and gave support to the whole system. Next on the top of the wooden piece connected to the lead screw was a bearing that would hold the lead screw in place during operation reducing vibration of the system and allow the system to move freely. Finally, the base was made out of 3D printed PLA that interfaced with the base of the ceramic wheel. The PLA base had a two holes cut out for the motors to fit into and allowed for the wooden board to be manually tilted at different angles. In addition, the motors/encoders were used from the lab.
 
- A CAD model of the project, which resembles its actual physical implementation is shown below. 
+ A CAD model of the project, which resembles its actual physical implementation is shown below.
 
- ![CAD Model](https://github.com/jdlu97/Rotating-Pen-Plotter-Machine/blob/main/img/assembly.png?raw=true)
+ <p align="center">
+    <img src="https://github.com/jdlu97/Rotating-Pen-Plotter-Machine/blob/main/img/assembly.png?raw=true" alt="CAD Model"/>
+ </p>
 
- **Figure:** CAD model of the project
+ <p align="center">CAD model of the project</p><br/>
 
  **Software Overview**
  
