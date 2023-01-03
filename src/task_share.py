@@ -3,17 +3,14 @@
 This file contains classes which allow tasks to share data without the risk
 of data corruption by interrupts. 
 @author JR Ridgely
-@date   2017-Jan-01 JRR Approximate date of creation of file
-@date   2021-Dec-18 JRR Docstrings changed to work without DoxyPyPy
-@copyright This program is copyright (c) 2017-2021 by JR Ridgely and released
-           under the GNU Public License, version 3.0. 
+@date   2017-Jan-01 File created
+@date   2021-Dec-18 Docstrings changed to work without DoxyPyPy
 """
 
 import array
 import gc
 import pyb
 import micropython
-
 
 ## This is a system-wide list of all the queues and shared variables. It is
 #  used to create diagnostic printouts. 
@@ -27,7 +24,6 @@ type_code_strings = {'b' : "int8",   'B' : "uint8",
                      'q' : "int64",  'Q' : "uint64",
                      'f' : "float",  'd' : "double"}
 
-
 def show_all ():
     """!
     Create a string holding a diagnostic printout showing the status of
@@ -36,7 +32,6 @@ def show_all ():
     """
     gen = (str (item) for item in share_list)
     return '\n'.join (gen)
-
 
 # ============================================================================
 
@@ -59,7 +54,6 @@ class BaseShare:
 
         # Add this queue to the global share and queue list
         share_list.append (self)
-
 
 # ============================================================================
 
@@ -136,7 +130,6 @@ class Queue (BaseShare):
         # collector to neaten up what memory is left for future use
         gc.collect ()
 
-
     @micropython.native
     def put (self, item, in_ISR = False):
         """!
@@ -188,7 +181,6 @@ class Queue (BaseShare):
         if self._thread_protect and not in_ISR:
             pyb.enable_irq (_irq_state)
 
-
     @micropython.native
     def get (self, in_ISR = False):
         """!
@@ -234,7 +226,6 @@ class Queue (BaseShare):
 
         return (to_return)
 
-
     @micropython.native
     def any (self):
         """!
@@ -244,7 +235,6 @@ class Queue (BaseShare):
         @return @c True if items are in the queue, @c False if not
         """
         return (self._num_items > 0)
-
 
     @micropython.native
     def empty (self):
@@ -256,7 +246,6 @@ class Queue (BaseShare):
         """
         return (self._num_items <= 0)
 
-
     @micropython.native
     def full (self):
         """!
@@ -266,7 +255,6 @@ class Queue (BaseShare):
         @return @c True if the queue is full
         """
         return (self._num_items >= self._size)
-
 
     @micropython.native
     def num_in (self):
@@ -278,7 +266,6 @@ class Queue (BaseShare):
         """
         return (self._num_items)
 
-
     def clear (self):
         """!
         Remove all contents from the queue.
@@ -288,7 +275,6 @@ class Queue (BaseShare):
         self._num_items = 0
         self._max_full = 0
 
-
     def __repr__ (self):
         """!
         This method puts diagnostic information about the queue into a string.
@@ -297,7 +283,6 @@ class Queue (BaseShare):
         """
         return ('{:<12s} Queue<{:s}> Max Full {:d}/{:d}'.format (self._name,
                 type_code_strings[self._type_code], self._max_full, self._size))
-
 
 # ============================================================================
 
@@ -323,7 +308,6 @@ class Share (BaseShare):
     """
     ## A counter used to give serial numbers to shares for diagnostic use.
     ser_num = 0
-
 
     def __init__ (self, type_code, thread_protect = True, name = None):
         """!
@@ -355,7 +339,6 @@ class Share (BaseShare):
             else 'Share' + str (Share.ser_num)
         Share.ser_num += 1
 
-
     @micropython.native
     def put (self, data, in_ISR = False):
         """!
@@ -378,7 +361,6 @@ class Share (BaseShare):
         if self._thread_protect and not in_ISR:
             pyb.enable_irq (irq_state)
 
-
     @micropython.native
     def get (self, in_ISR = False):
         """!
@@ -399,7 +381,6 @@ class Share (BaseShare):
             pyb.enable_irq (irq_state)
 
         return (to_return)
-
 
     def __repr__ (self):
         """!

@@ -8,10 +8,8 @@ in the system are kept in a list maintained by class @c CoTaskList; the
 system scheduler then runs the tasks' @c run() methods according to a 
 chosen scheduling algorithm such as round-robin or highest-priority-first. 
 @author JR Ridgely
-@date   2017-Jan-01 JRR Approximate date of creation of file
-@date   2021-Dec-18 JRR Docstrings modified to work without DoxyPyPy
-@copyright This program is copyright (c) 2017-2021 by JR Ridgely and released
-           under the GNU Public License, version 3.0. 
+@date   2017-Jan-01 File created
+@date   2021-Dec-18 Docstrings modified to work without DoxyPyPy
 """
 
 import gc                              # Memory allocation garbage collector

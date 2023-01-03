@@ -1,16 +1,16 @@
-'''!    @file    task_motor_controller.py
-        @brief   Runs the motor and controller tasks together.  
-        @details Implements closed-loop position control on a motor
-                 using a task defined as a generator.
-        @author  Cade Liberty
-        @author  Juan Luna
-        @author  Marcus Monroe
-        @date    March 10, 2022
+'''!    @file       task_controller.py
+        @brief      Runs the motor and controller tasks together.  
+        @details    Implements closed-loop position control on a motor
+                    using a task defined as a generator.
+
+        @author     Juan Luna
+        @date       2022-03-10 Original file
+        @date       2022-12-30 Modified for portfolio update
 '''
 import controller
 import motor
 
-class Task_Motor_Controller:
+class Task_Controller:
     '''! @brief     Task motor controller class.
     '''
     def __init__(self, encoder_share, gain_share, set_point_share, next_flag, ENA_pin, In1_pin, In2_pin, Timer):
@@ -47,28 +47,29 @@ class Task_Motor_Controller:
         self.tim_MOT_A = Timer
         
         ## Motor object
-        self.motor = motor.MotorDriver(self.ENA, self.IN1A_pin, self.IN2A_pin, self.tim_MOT_A)
+        self.motor = motor.Motor_Driver(self.ENA, self.IN1A_pin, self.IN2A_pin, self.tim_MOT_A)
         
     def run(self):
-         '''! @brief Runs the controller task and sets new duty cycle 
-         '''
-         ## Controller object
-         self.controller = controller.controller(self.set_point_share, self.gain_share.get())
-         while True:
-             
-             print(self.set_point_share.get())    
-             
-             ## Encoder position reading
-             true_position = int(self.encoder_share.get())
-             print('Encoder value: ', true_position)
-             ## Difference between measured and setpoint values 
-             self.controller.set_point(self.set_point_share.get())
-             self.calc_error = self.controller.run(true_position)
-             self.motor.set_duty_cycle(float(self.calc_error))
-             
-             if  self.set_point_share.get() - self.set_point_share.get()*.05 <= true_position <= self.set_point_share.get() + self.set_point_share.get()*.05:
-                 self.next_flag.put(1)
-                 self.motor.set_duty_cycle(0)
-             yield (0)
-             
+        '''! @brief Runs the controller task and sets new duty cycle 
+        '''
+        ## Controller object
+        self.controller = controller.Controller(self.set_point_share, self.gain_share.get())
+
+        while True:
+            
+            print(self.set_point_share.get())    
+            
+            ## Encoder position reading
+            true_position = int(self.encoder_share.get())
+            print('Encoder value: ', true_position)
+            ## Difference between measured and setpoint values 
+            self.controller.set_point(self.set_point_share.get())
+            self.calc_error = self.controller.run(true_position)
+            self.motor.set_duty_cycle(float(self.calc_error))
+            
+            if  self.set_point_share.get() - self.set_point_share.get()*.05 <= true_position <= self.set_point_share.get() + self.set_point_share.get()*.05:
+                self.next_flag.put(1)
+                self.motor.set_duty_cycle(0)
+            yield (0)
+            
              

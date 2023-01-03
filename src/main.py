@@ -1,16 +1,10 @@
-"""!
-@file main.py
-    This file contains the main script for our Term Project.
-
-    The original structure of the code was developed by JR Ridgely, 
-    instructor of the lab course. No copyright infringement is intended.
+'''!    @file   main.py
+        @brief  This file contains the main script for the Pen-Plotter Project.
     
-@date   March 10, 2022
-    
-@author Cade Liberty
-@author Juan Luna
-@author Marcus Monroe
-"""
+        @author Juan Luna
+        @date   2022-03-10 Original file
+        @date   2022-12-30 Modified for portfolio update
+'''
 
 import gc
 import pyb
@@ -18,7 +12,7 @@ import utime
 import cotask
 import task_share
 import task_encoder
-import task_motor_controller
+import task_controller
 
 if __name__ == "__main__":
 
@@ -137,9 +131,9 @@ if __name__ == "__main__":
     ## Encoder 2 task object
     task_encoder2 = task_encoder.Task_Encoder(encoder_share_2, ENC1A_pin_2, ENC1B_pin_2, tim_ENC_A_2) 
     ## Motor Controller 1 task object
-    task_motor_controller1 = task_motor_controller.Task_Motor_Controller(encoder_share_1, gain_share_1, set_point_share_1, next_flag1, ENA_pin_1, In1_pin_1, In2_pin_1, Timer_1)
+    task_motor_controller1 = task_controller.Task_Controller(encoder_share_1, gain_share_1, set_point_share_1, next_flag1, ENA_pin_1, In1_pin_1, In2_pin_1, Timer_1)
     ## Motor Controller 2 task object
-    task_motor_controller2 = task_motor_controller.Task_Motor_Controller(encoder_share_2, gain_share_2, set_point_share_2, next_flag2, ENA_pin_2, In1_pin_2, In2_pin_2, Timer_2)    
+    task_motor_controller2 = task_controller.Task_Controller(encoder_share_2, gain_share_2, set_point_share_2, next_flag2, ENA_pin_2, In1_pin_2, In2_pin_2, Timer_2)    
 
     ## Encoder 1 task object from cotask module     
     task_enc1 = cotask.Task (task_encoder1.run, name = 'Task_Encoder', priority = 2, 

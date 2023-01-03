@@ -1,11 +1,11 @@
-'''!    @file    task_encoder.py
-        @brief   Runs the encoder driver to receive current encoder position
-        @details Establishes encoder pin values and runs encoder frequently 
-                 to provide measured values to closed loop gain.
-        @author  Cade Liberty
-        @author  Juan Luna
-        @author  Marcus Monroe
-        @date    March 10, 2022
+'''!    @file       task_encoder.py
+        @brief      Runs the encoder driver to receive current encoder position
+        @details    Establishes encoder pin values and runs encoder frequently 
+                    to provide measured values to closed loop gain.
+
+        @author     Juan Luna
+        @date       2022-03-10 Original file
+        @date       2022-12-30 Modified for portfolio update
 '''
 
 import pyb
@@ -25,8 +25,7 @@ class Task_Encoder:
         ## Share variable storing encoder value.
         self.encoder_share = encoder_share
         ## Encoder object
-        self.encoder = encoder.EncoderDriver(ENC1A_pin, ENC1B_pin, tim_ENC_A)
-        
+        self.encoder = encoder.Encoder_Driver(ENC1A_pin, ENC1B_pin, tim_ENC_A)
         
     def run(self):
         '''! @brief Runs the encoder driver and position to share variable

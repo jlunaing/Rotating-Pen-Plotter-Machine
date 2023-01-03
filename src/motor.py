@@ -3,15 +3,15 @@
         @details    Encapsulates functionality of DC motor in the form of a 
                     motor driver class. This class sets up pins to control the
                     motor and sets the duty cycle and direction of the motor. 
-        @author     Cade Liberty
+
         @author     Juan Luna
-        @author     Marcus Monroe
-        @date       January 26, 2022
+        @date       2022-01-26 Original file
+        @date       2022-12-30 Modified for portfolio update
 '''
 
 import pyb
 
-class MotorDriver:
+class Motor_Driver:
     '''! @brief      A motor driver class for the L6206 motor driver.
          @details    Objects of this class can be used to instantiate motor
                      driver objects to control two DC motors.
