@@ -1,6 +1,6 @@
-# Term Project: Plotting on a Pint Glass
+# Plotting on a Pint Glass
 
-This repository contains the source code and documentation for the Rotating Pen Plotter Machine project.
+ This repository contains the source code and documentation for the Rotating Pen Plotter Machine project.
 
  ## Background
  
